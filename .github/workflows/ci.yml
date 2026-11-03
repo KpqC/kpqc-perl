@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            perl: "5.20"
+          - os: ubuntu-24.04
+            perl: "5"
+          - os: macos-15
+            perl: "5"
+    runs-on: ${{ matrix.os }}
+    name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: ${{ matrix.perl }}
+          install-modules: ExtUtils::MakeMaker
+          enable-modules-cache: false
+      - run: perl -V
+      - run: perl Makefile.PL
+      - run: make -j2
+      - run: make test
+      - run: make disttest
+      - run: make distcheck
+
+  known-answer-tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: "5"
+          install-modules: ExtUtils::MakeMaker
+          enable-modules-cache: false
+      - uses: actions/checkout@v7
+        with:
+          repository: KpqC/kpqc-test-vectors
+          ref: d75490bf824faa4b148cd0b901a2eb13198fe0da
+          path: kpqc-test-vectors
+      - run: KPQC_KAT=1 perl Makefile.PL
+      - run: make -j2
+      - name: Validate all known-answer vectors
+        env:
+          KPQC_KAT: 1
+          KPQC_TEST_VECTORS: ${{ github.workspace }}/kpqc-test-vectors
+        run: make test

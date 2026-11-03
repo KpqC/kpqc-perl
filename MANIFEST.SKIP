@@ -1,0 +1,14 @@
+^\.git/
+^\.gitignore$
+^\.github/
+^blib/
+^_build/
+^Makefile(?:\.old)?$
+^MYMETA\.(?:json|yml)$
+^MANIFEST\.bak$
+^pm_to_blib$
+^KpqC\.c(?:\.bak)?$
+^Crypt-KpqC-[^/]+/
+\.bs$
+\.o$
+\.tar\.gz$
