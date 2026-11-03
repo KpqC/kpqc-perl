@@ -1,5 +1,9 @@
 Revision history for Crypt-KpqC
 
+0.1.1  2026-11-03
+    - Add KpqC as the recommended public namespace.
+    - Retain Crypt::KpqC as an alternate namespace for the same API.
+
 0.1.0  2026-11-03
     - Add synchronous Perl APIs for AIMer, HAETAE, NTRU+, and SMAUG-T.
     - Bundle the pinned native reference implementations.

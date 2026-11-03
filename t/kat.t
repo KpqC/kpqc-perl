@@ -5,7 +5,8 @@ use bytes;
 
 use File::Spec;
 use Test::More;
-use Crypt::KpqC qw(:all);
+use KpqC qw(:all);
+use Crypt::KpqC ();
 
 my $vector_root = $ENV{KPQC_TEST_VECTORS};
 plan skip_all => 'set KPQC_TEST_VECTORS to run known-answer tests'

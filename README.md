@@ -19,8 +19,10 @@ locally. It does not download native libraries during installation.
 From CPAN:
 
 ```sh
-cpanm Crypt::KpqC
+cpanm KpqC
 ```
+
+The same API is also available through the `Crypt::KpqC` namespace.
 
 From a source checkout:
 
@@ -43,7 +45,7 @@ make install
 ### Signatures
 
 ```perl
-use Crypt::KpqC qw(aimer128f);
+use KpqC qw(aimer128f);
 
 my $algorithm = aimer128f;
 my $keys = $algorithm->generate_key_pair;
@@ -66,7 +68,7 @@ be distributed; the secret key and resulting shared secret must remain
 private.
 
 ```perl
-use Crypt::KpqC qw(smaugt192);
+use KpqC qw(smaugt192);
 
 my $algorithm = smaugt192;
 my $recipient = $algorithm->generate_key_pair;

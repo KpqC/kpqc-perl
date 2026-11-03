@@ -8,7 +8,7 @@ use Exporter qw(import);
 use Hash::Util qw(lock_hashref);
 use XSLoader ();
 
-our $VERSION = '0.1.0';
+our $VERSION = '0.1.1';
 
 our @EXPORT_OK = qw(
     aimer128f aimer128s aimer192f aimer192s aimer256f aimer256s
@@ -215,6 +215,8 @@ and does not download native libraries.
 
 This package is independently maintained and is not an official distribution
 from the algorithm authors.
+
+The same public API is available through the shorter L<KpqC> namespace.
 
 =head1 ALGORITHMS
 

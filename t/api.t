@@ -3,7 +3,8 @@ use strict;
 use warnings;
 
 use Test::More;
-use Crypt::KpqC qw(:all);
+use KpqC qw(:all);
+use Crypt::KpqC ();
 
 sub dies (&) {
     my ($operation) = @_;
@@ -17,7 +18,9 @@ sub tamper {
     return chr((ord(substr($value, 0, 1)) + 1) % 256) . substr($value, 1);
 }
 
-is($Crypt::KpqC::VERSION, '0.1.0', 'version');
+is($KpqC::VERSION, '0.1.1', 'KpqC version');
+is($Crypt::KpqC::VERSION, $KpqC::VERSION, 'namespaces share a version');
+is(aimer128f, Crypt::KpqC::aimer128f(), 'namespaces share algorithm objects');
 
 my @signatures = signature_algorithms();
 my @kems = kem_algorithms();
